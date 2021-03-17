@@ -7,11 +7,14 @@
   </div>
   <h3>这是组件注入的inject：dataNum</h3>
   <h5>{{dataNum}}</h5>
+  <h3>这里是store里的vuexNum</h3>
+  <h5>{{store.state.vuexNum}}</h5>
 
 </template>
 
 <script lang="ts">
 import { ref, defineComponent,inject } from 'vue'
+import {useStore} from "vuex";
 import {getRandomNumber} from '../util'
 export default defineComponent({
   name: 'four',
@@ -19,6 +22,7 @@ export default defineComponent({
     
   },
   setup: () => {
+    const store = useStore()
     let tableData:any = inject('tableData')
     let dataNum:any = inject('dataNum')
     const changeData = ()=>{
@@ -26,7 +30,7 @@ export default defineComponent({
       tableData[0].address = getRandomNumber(99000,99999)
       dataNum.value = getRandomNumber(0,100)
     }
-    return {tableData,dataNum,changeData}
+    return {tableData,dataNum,changeData,store}
   }
 })
 </script>

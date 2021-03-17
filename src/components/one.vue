@@ -6,6 +6,7 @@
     <h5>{{item.address}}</h5>
   </div>
   <h3>这是生成的dataNum</h3>
+  <el-button @click="changeVuexData">这是修改vuex中数据的方法</el-button>
   <h5>{{dataNum}}</h5>
   <h3>这里是store里的vuexNum</h3>
   <h5>{{store.state.vuexNum}}</h5>
@@ -35,6 +36,7 @@ export default defineComponent({
     two,
     three
   },
+
   setup: () => {
     const store = useStore();
     let dataNum = ref(20)
@@ -49,12 +51,27 @@ export default defineComponent({
       state.tableData[0].address = getRandomNumber(99000,99999)
       dataNum.value = getRandomNumber(0,100)
     }
+    
+    //这几个change事件都是一个作用
+    const changeVuexData = ()=>{
+      store.commit('addVuexNum')
+    }
+    // const changeVuexData = ()=>{
+    //   store.dispatch('ADDVUEXNUM')
+    // }
+    // const changeVuexData = ()=>{
+    //   store.commit('setVuexNum',getRandomNumber(0,100))
+    // }
+    // const changeVuexData = ()=>{
+    //   store.dispatch('SETVUEXNUM',getRandomNumber(0,100))
+    // }
+   
     const getProps = (params1:number,params2:number)=>{
 
        state.tableData[0].address = params2
       dataNum.value = params1
     }
-    return {state,store,changeData,dataNum,getProps}
+    return {state,store,changeData,dataNum,getProps,changeVuexData}
   }
 })
 </script>

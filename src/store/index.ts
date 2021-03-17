@@ -14,7 +14,14 @@ export default createStore({
   },
   actions:{
     SETVUEXNUM(ctx,value){
-      ctx.commit('setVuexNum',value)
-    }
+      setTimeout(() => {
+        ctx.commit('setVuexNum',value)
+      }, 300)
+    },
+    ADDVUEXNUM(ctx){
+      setTimeout(() => {
+        ctx.commit('addVuexNum')
+      }, 300)
+    },
   }
 })
