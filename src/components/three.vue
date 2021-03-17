@@ -1,9 +1,8 @@
 <template>
   <h1>这里是three组件</h1>
   <h3>这里是组件传值的props：tableData</h3>
-  <el-button @click="changeData">这是three组件内部的修改tableData方法</el-button>
+  <el-button @click="changeData">这是three组件内部的,用emit方式修改tableData方法</el-button>
   <div v-for="(item , index) in tableData" :key="index">
-    <h5>{{item.date}}</h5>
     <h5>{{item.address}}</h5>
   </div>
   <h3>这是组件传值的props:dataNum</h3>
@@ -31,11 +30,8 @@ export default defineComponent({
   },
   setup: (props,{emit}) => {
     const store = useStore();
-    let {tableData,dataNum} = toRefs(props)
     const changeData = ()=>{
       emit('getProps',getRandomNumber(5,20),getRandomNumber(88000,88888))
-      // tableData[0].address = getRandomNumber(99000,99999)
-      // dataNum.value = getRandomNumber(0,100)
     }
     return {store,changeData}
   }

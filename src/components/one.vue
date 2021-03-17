@@ -3,7 +3,6 @@
   <h3>这里是生成的state的tableData</h3>
   <el-button @click="changeData">这是one组件内部的修改tableData方法</el-button>
   <div v-for="(item , index) in state.tableData" :key="index">
-    <h5>{{item.date}}</h5>
     <h5>{{item.address}}</h5>
   </div>
   <h3>这是生成的dataNum</h3>
@@ -22,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, reactive } from 'vue'
+import { ref, defineComponent, reactive,provide } from 'vue'
 import {useStore} from "vuex";
 import two from './two.vue'
 import three from './three.vue'
@@ -41,10 +40,11 @@ export default defineComponent({
     let dataNum = ref(20)
     const state = reactive({
       tableData:[{
-          date: '2016-05-02',
           address: 99999
         }]
     })
+    provide('tableData',state.tableData)
+    provide('dataNum',dataNum)
     const changeData = ()=>{
       state.tableData[0].address = getRandomNumber(99000,99999)
       dataNum.value = getRandomNumber(0,100)
